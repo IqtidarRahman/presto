@@ -10,14 +10,14 @@ function Login () {
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
 
-  // Submits the register form when the enter key is pressed in any of the fields
+  // Submits the login form when the enter key is pressed in any of the fields
   function handleKeyDown (event) {
     if (event.key === 'Enter') {
       newUserRequest();
     }
   }
 
-  // POST request for registering a new user
+  // POST request for logging in a new user
   const newUserRequest = async () => {
     console.log(email, password);
     if (email !== '' && password !== '') {
