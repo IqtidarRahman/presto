@@ -10,6 +10,7 @@ function App () {
   if (localStorage.getItem('token')) {
     storageToken = localStorage.getItem('token');
   }
+
   const [token, setToken] = React.useState(storageToken);
 
   const updateToken = (token) => {

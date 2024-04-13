@@ -64,7 +64,6 @@ function Register ({ setTokenFunc }) {
 
   return (
   <>
-    {/* <Box component="section" sx={{ p: 2, border: '1px dashed grey', width: '400px' }}> */}
     <BackgroundContainer>
       <OutsideBox>
         <h1 style={{ fontFamily: 'arial' }}>Welcome to Presto!</h1>
@@ -76,7 +75,6 @@ function Register ({ setTokenFunc }) {
         <Button onClick={goToLogin} variant="contained">Back</Button><br /><br />
       </OutsideBox>
     </BackgroundContainer>
-    {/* </Box> */}
   </>
   );
 }

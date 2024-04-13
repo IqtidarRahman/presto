@@ -48,7 +48,6 @@ function Login ({ setTokenFunc }) {
     justifyContent: 'center', /* Center horizontally */
     alignItems: 'center', /* Center vertically */
     minHeight: '100vh', /* Ensures the container takes up at least the full viewport height */
-    // paddingTop: '50px',
   });
 
   // Box surrounding the input elements
@@ -60,7 +59,6 @@ function Login ({ setTokenFunc }) {
 
   return (
   <>
-    {/* <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}> */}
     <BackgroundContainer>
       <OutsideBox>
         <h1 style={{ fontFamily: 'arial' }}>Login to Presto</h1>
@@ -70,7 +68,6 @@ function Login ({ setTokenFunc }) {
         <Button onClick={goToRegister} variant="contained">Register</Button> <br /><br />
       </OutsideBox>
     </BackgroundContainer>
-    {/* </Box> */}
   </>
   );
 }
