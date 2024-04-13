@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
 
 function Register ({ setTokenFunc }) {
   const [name, setName] = React.useState('');
@@ -17,6 +17,11 @@ function Register ({ setTokenFunc }) {
     if (event.key === 'Enter') {
       newUserRequest();
     }
+  }
+
+  // Back button redirects back to Login screen
+  function goToLogin () {
+    navigate('/login');
   }
 
   // POST request for registering a new user
@@ -42,16 +47,36 @@ function Register ({ setTokenFunc }) {
     }
   }
 
+  // CSS Properties for the background
+  const BackgroundContainer = styled('div')({
+    display: 'flex',
+    justifyContent: 'center', /* Center horizontally */
+    alignItems: 'center', /* Center vertically */
+    minHeight: '100vh', /* Ensures the container takes up at least the full viewport height */
+  });
+
+  // Box surrounding the input elements
+  const OutsideBox = styled('div')({
+    width: '400px',
+    textAlign: 'center',
+    border: '1px solid grey',
+  });
+
   return (
   <>
-    <Box component="section" sx={{ p: 2, border: '1px dashed grey', width: '400px' }}>
-      <h1 style={{ fontFamily: 'arial' }}>Welcome to Presto!</h1>
-      <TextField id="register-name-box" label="Name" variant="outlined" type="text" onChange={e => setName(e.target.value)} value ={name} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="register-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="register-pass-box" label="Password" variant="outlined" type="password" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="register-confirmpass-box" label="Confirm Password" variant="outlined" type="password" onChange={e => setConfirmPass(e.target.value)} value ={confirmPass} onKeyDown={handleKeyDown}/> <br /><br />
-      <Button onClick={newUserRequest} variant="contained">Register</Button>
-    </Box>
+    {/* <Box component="section" sx={{ p: 2, border: '1px dashed grey', width: '400px' }}> */}
+    <BackgroundContainer>
+      <OutsideBox>
+        <h1 style={{ fontFamily: 'arial' }}>Welcome to Presto!</h1>
+        <TextField id="register-name-box" label="Name" variant="outlined" type="text" onChange={e => setName(e.target.value)} value ={name} onKeyDown={handleKeyDown}/> <br /><br />
+        <TextField id="register-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
+        <TextField id="register-pass-box" label="Password" variant="outlined" type="password" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
+        <TextField id="register-confirmpass-box" label="Confirm Password" variant="outlined" type="password" onChange={e => setConfirmPass(e.target.value)} value ={confirmPass} onKeyDown={handleKeyDown}/> <br /><br />
+        <Button onClick={newUserRequest} variant="contained">Register</Button>
+        <Button onClick={goToLogin} variant="contained">Back</Button><br /><br />
+      </OutsideBox>
+    </BackgroundContainer>
+    {/* </Box> */}
   </>
   );
 }

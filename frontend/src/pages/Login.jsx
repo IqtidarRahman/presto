@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
 
 function Login ({ setTokenFunc }) {
   const [email, setEmail] = React.useState('');
@@ -15,6 +15,11 @@ function Login ({ setTokenFunc }) {
     if (event.key === 'Enter') {
       newUserRequest();
     }
+  }
+
+  // Register button directs to register
+  function goToRegister () {
+    navigate('/register');
   }
 
   // POST request for logging in a new user
@@ -37,14 +42,35 @@ function Login ({ setTokenFunc }) {
     }
   }
 
+  // CSS Properties for the background
+  const BackgroundContainer = styled('div')({
+    display: 'flex',
+    justifyContent: 'center', /* Center horizontally */
+    alignItems: 'center', /* Center vertically */
+    minHeight: '100vh', /* Ensures the container takes up at least the full viewport height */
+    // paddingTop: '50px',
+  });
+
+  // Box surrounding the input elements
+  const OutsideBox = styled('div')({
+    width: '400px',
+    textAlign: 'center',
+    border: '1px solid grey',
+  });
+
   return (
   <>
-    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
-      <h1 style={{ font: 'arial' }}>Welcome to Presto!</h1>
-      <TextField id="login-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="login-pass-box" label="Password" variant="outlined" type="text" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
-      <Button onClick={newUserRequest} variant="contained">Login</Button>
-    </Box>
+    {/* <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}> */}
+    <BackgroundContainer>
+      <OutsideBox>
+        <h1 style={{ fontFamily: 'arial' }}>Login to Presto</h1>
+        <TextField id="login-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
+        <TextField id="login-pass-box" label="Password" variant="outlined" type="text" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
+        <Button onClick={newUserRequest} variant="contained">Login</Button>
+        <Button onClick={goToRegister} variant="contained">Register</Button> <br /><br />
+      </OutsideBox>
+    </BackgroundContainer>
+    {/* </Box> */}
   </>
   );
 }
