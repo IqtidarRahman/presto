@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function Login () {
+function Login ({ setTokenFunc }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ function Login () {
           email,
           password
         });
+        setTokenFunc(response.data.token);
         console.log(response.data);
         navigate('/dashboard');
       } catch (err) {

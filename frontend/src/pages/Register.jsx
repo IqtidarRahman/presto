@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function Register () {
+function Register ({ setTokenFunc }) {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -13,7 +13,7 @@ function Register () {
   const navigate = useNavigate();
 
   // Submits the register form when the enter key is pressed in any of the fields
-  function handleKeyDown (event) {
+  function handleKeyDown () {
     if (event.key === 'Enter') {
       newUserRequest();
     }
@@ -29,6 +29,7 @@ function Register () {
           password,
           name
         });
+        setTokenFunc(response.data.token);
         console.log(response.data);
         navigate('/dashboard');
       } catch (err) {
@@ -43,12 +44,12 @@ function Register () {
 
   return (
   <>
-    <Box component="section" sx={{ p: 2, border: '1px dashed grey' }}>
-      <h1 style={{ font: 'arial' }}>Welcome to Presto!</h1>
+    <Box component="section" sx={{ p: 2, border: '1px dashed grey', width: '400px' }}>
+      <h1 style={{ fontFamily: 'arial' }}>Welcome to Presto!</h1>
       <TextField id="register-name-box" label="Name" variant="outlined" type="text" onChange={e => setName(e.target.value)} value ={name} onKeyDown={handleKeyDown}/> <br /><br />
       <TextField id="register-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="register-pass-box" label="Password" variant="outlined" type="text" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
-      <TextField id="register-confirmpass-box" label="Confirm Password" variant="outlined" type="text" onChange={e => setConfirmPass(e.target.value)} value ={confirmPass} onKeyDown={handleKeyDown}/> <br /><br />
+      <TextField id="register-pass-box" label="Password" variant="outlined" type="password" onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
+      <TextField id="register-confirmpass-box" label="Confirm Password" variant="outlined" type="password" onChange={e => setConfirmPass(e.target.value)} value ={confirmPass} onKeyDown={handleKeyDown}/> <br /><br />
       <Button onClick={newUserRequest} variant="contained">Register</Button>
     </Box>
   </>
