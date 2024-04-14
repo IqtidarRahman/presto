@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/system';
 
 function Register ({ setTokenFunc }) {
   const [name, setName] = React.useState('');
@@ -13,8 +12,9 @@ function Register ({ setTokenFunc }) {
   const navigate = useNavigate();
 
   // Submits the register form when the enter key is pressed in any of the fields
-  function handleKeyDown () {
+  function handleKeyDown (event) {
     if (event.key === 'Enter') {
+      event.preventDefault();
       newUserRequest();
     }
   }
@@ -47,25 +47,10 @@ function Register ({ setTokenFunc }) {
     }
   }
 
-  // CSS Properties for the background
-  const BackgroundContainer = styled('div')({
-    display: 'flex',
-    justifyContent: 'center', /* Center horizontally */
-    alignItems: 'center', /* Center vertically */
-    minHeight: '100vh', /* Ensures the container takes up at least the full viewport height */
-  });
-
-  // Box surrounding the input elements
-  const OutsideBox = styled('div')({
-    width: '400px',
-    textAlign: 'center',
-    border: '1px solid grey',
-  });
-
   return (
   <>
-    <BackgroundContainer>
-      <OutsideBox>
+    <div id='background-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <div id='outside-box' style={{ width: '400px', textAlign: 'center', border: '1px solid grey' }}>
         <h1 style={{ fontFamily: 'arial' }}>Welcome to Presto!</h1>
         <TextField id="register-name-box" label="Name" variant="outlined" type="text" onChange={e => setName(e.target.value)} value ={name} onKeyDown={handleKeyDown}/> <br /><br />
         <TextField id="register-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
@@ -73,8 +58,8 @@ function Register ({ setTokenFunc }) {
         <TextField id="register-confirmpass-box" label="Confirm Password" variant="outlined" type="password" onChange={e => setConfirmPass(e.target.value)} value ={confirmPass} onKeyDown={handleKeyDown}/> <br /><br />
         <Button onClick={newUserRequest} variant="contained">Register</Button>
         <Button onClick={goToLogin} variant="contained">Back</Button><br /><br />
-      </OutsideBox>
-    </BackgroundContainer>
+      </div>
+    </div>
   </>
   );
 }
