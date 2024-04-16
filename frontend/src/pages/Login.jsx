@@ -43,11 +43,11 @@ function Login ({ setTokenFunc }) {
 
   return (
   <>
-    <div id='background-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <div id='outside-box' style={{ width: '400px', textAlign: 'center', border: '1px solid grey' }}>
-        <h1 style={{ fontFamily: 'arial' }}>Login to Presto</h1>
-        <TextField id="login-email-box" label="Email" variant="outlined" type='text' onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown}/> <br /><br />
-        <TextField id="login-pass-box" label="Password" variant="outlined" type='password' onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown}/> <br /><br />
+    <div id='background-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#dbeafe' }}>
+      <div id='outside-box' style={{ width: '400px', textAlign: 'center', backgroundColor: '#bfdbfe', borderRadius: '15px' }}>
+        <h1 style={{ fontFamily: 'arial', color: '#1e3a8a' }}>Login to Presto</h1>
+        <TextField id="login-email-box" label="Email" variant="outlined" type='text' onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown} style={{ backgroundColor: '#eff6ff' }}/> <br /><br />
+        <TextField id="login-pass-box" label="Password" variant="outlined" type='password' onChange={e => setPassword(e.target.value)} value ={password} onKeyDown={handleKeyDown} style={{ backgroundColor: '#eff6ff' }}/> <br /><br />
         <Button onClick={newUserRequest} variant="contained">Login</Button>
         <Button onClick={goToRegister} variant="contained">Register</Button> <br /><br />
       </div>
