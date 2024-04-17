@@ -44,6 +44,7 @@ function Dashboard ({ token, setTokenFunc }) {
             {pressies && Object.entries(pressies).map(pressie => (
               <PresentationCards
                   key={pressie.id}
+                  presid={pressie[0]}
                   name={pressie[1].name}
                   // thumbnail={pressie.thumbnail}
                   description={pressie[1].description}

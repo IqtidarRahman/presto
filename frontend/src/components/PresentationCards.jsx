@@ -2,16 +2,13 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
 
-const PresentationCards = ({ name, description, slideCount }) => {
+const PresentationCards = ({ presid, name, description, slideCount }) => {
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = React.useState(false);
-  console.log([name, description, slideCount]);
-
-  console.log(name);
 
   // Goes to Edit Page upon clicking
   const goToEdit = () => {
-    navigate('/edit');
+    navigate('/edit/' + presid + '/' + name);
   }
 
   return (

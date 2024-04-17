@@ -25,8 +25,6 @@ const NewPresModal = ({ open, closeModal, token }) => {
   const handleCreateButton = () => {
     if (title !== '') {
       getStore();
-      closeModal();
-      navigate('/edit');
     } else {
       alert('Please enter name for presentation')
     }
@@ -42,11 +40,18 @@ const NewPresModal = ({ open, closeModal, token }) => {
       }
     }).then((response) => {
       currentData = response.data.store;
-      console.log(currentData);
+
+      // Create new Id (get the id number of the last presentation, then add 1, this will make all ids unique)
+      const dictLength = Object.keys(currentData).length;
+      let newId = 1
+      if (dictLength !== 0) {
+        const keysArray = Object.keys(currentData);
+        newId = parseInt(keysArray[keysArray.length - 1]) + 1;
+      }
 
       // Update the old data and add in the new presentation to the data
       store = Object.assign({}, currentData, {
-        [title]: {
+        [newId]: {
           name: title,
           description: description,
           defaultColor: null,
@@ -60,12 +65,12 @@ const NewPresModal = ({ open, closeModal, token }) => {
       });
 
       // Put Request to Save the New Data
-      savePres();
+      savePres(newId.toString());
     })
   }
 
   // Save the presentation to database
-  const savePres = async () => {
+  const savePres = async (id) => {
     try {
       await axios.put('http://localhost:5005/store', {
         store
@@ -78,6 +83,11 @@ const NewPresModal = ({ open, closeModal, token }) => {
     } catch (err) {
       alert(err.response.data.error);
     }
+
+    closeModal();
+
+    // New route for presentation, taking into account of the presentation id and the title of presentation
+    navigate('/edit/' + id + '/' + title);
   }
 
   return (
