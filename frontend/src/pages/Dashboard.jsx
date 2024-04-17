@@ -33,14 +33,14 @@ function Dashboard ({ token, setTokenFunc }) {
       <div id='background' style= {{ height: '100%', width: '100%', padding: '0', margin: '0', backgroundColour: 'red' }}>
         <NewPresModal open = {viewModal} closeModal={() => setViewModal(false)} token={token}/>
         <Grid container spacing={0}>
-          <Grid item xs={12} style= {{ height: '10vh', backgroundColor: '#dbeafe', border: '1px solid black' }}>
+          <Grid item xs={12} style= {{ height: '10vh', backgroundColor: '#dbeafe' }}>
               <div id="logout-button-div"style= {{ float: 'right' }}>
                 <Button variant="contained" onClick={() => setViewModal(true)}>+ New Presentation</Button>
                 <LogoutButton token = {token} setTokenFunc = {setTokenFunc}/>
               </div>
               <h1 id="Presto-Logo" style= {{ float: 'left', fontFamily: 'Arial', color: '#1e3a8a' }}>Presto</h1>
           </Grid>
-          <Grid item xs={12} style= {{ height: '85vh', backgroundColor: '#bfdbfe', display: 'flex', flexDirection: 'row', border: '1px solid black' }}>
+          <Grid item xs={12} style= {{ height: '85vh', backgroundColor: '#bfdbfe', display: 'flex', flexDirection: 'row', paddingTop: '1%' }}>
             {pressies && Object.entries(pressies).map(pressie => (
               <PresentationCards
                   key={pressie.id}
@@ -51,7 +51,7 @@ function Dashboard ({ token, setTokenFunc }) {
               />
             ))}
           </Grid>
-          <Grid item xs={12} style= {{ height: '5vh', backgroundColor: '#bfdbfe', border: '1px solid black' }}>
+          <Grid item xs={12} style= {{ height: '5vh', backgroundColor: '#bfdbfe' }}>
             Created by Jerry Lin and Iqtidar Rahman
           </Grid>
         </Grid>

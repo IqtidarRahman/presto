@@ -13,7 +13,10 @@ function Edit () {
   return (
     <>
       <div style = {{ height: '100vh', backgroundColor: '#dbeafe' }}>
-        <Button onClick={goBackToDash} variant="contained">Back</Button>
+        <div style = {{ float: 'right' }}>
+          <Button onClick={goBackToDash} variant="contained">Back</Button>
+        </div>
+        <br/><br/><br/>
         <PresSlide/>
       </div>
     </>
