@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
+import Edit from './pages/Edit';
 
 function App () {
   let storageToken = null;
@@ -25,6 +26,7 @@ function App () {
           <Route path="/register" element={<Register setTokenFunc = {updateToken}/>} />
           <Route path="/login" element={<Login setTokenFunc = {updateToken}/>} /> {/* Pass the setToken function as a variable in Login */}
           <Route path="/dashboard" element={<Dashboard token = {token} setTokenFunc = {updateToken} />} />
+          <Route path="/edit" element={<Edit />} />
         </Route>
       </Routes>
     </BrowserRouter>

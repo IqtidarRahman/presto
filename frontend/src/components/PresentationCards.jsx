@@ -15,7 +15,7 @@ const PresentationCards = ({ name, description, slideCount }) => {
   //     </div>
   // </div>
 
-      <Grid container spacing={0} style = {{ width: '300px', height: '150px', backgroundColor: 'white', borderRadius: '15px', fontFamily: 'Helvetica' }}>
+      <Grid container spacing={0} style = {{ width: '300px', height: '150px', backgroundColor: 'white', borderRadius: '15px', fontFamily: 'Helvetica', marginLeft: '10px', marginRight: '10px' }}>
         <Grid item xs={12} style = {{ height: '70%', backgroundColor: '#f3f4f6', borderRadius: '15px 15px 0 0' }}>
         </Grid>
         <Grid item xs={6} style = {{ height: '15%' }}>

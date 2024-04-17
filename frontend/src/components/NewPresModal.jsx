@@ -2,10 +2,12 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const NewPresModal = ({ open, closeModal, setViewSlide, token }) => {
+const NewPresModal = ({ open, closeModal, token }) => {
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
+  const navigate = useNavigate();
 
   // If the viewModal state from dashboard is false, dont display the Modal
   if (!open) {
@@ -23,8 +25,8 @@ const NewPresModal = ({ open, closeModal, setViewSlide, token }) => {
   const handleCreateButton = () => {
     if (title !== '') {
       getStore();
-      setViewSlide();
       closeModal();
+      navigate('/edit');
     } else {
       alert('Please enter name for presentation')
     }
