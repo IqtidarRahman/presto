@@ -40,7 +40,7 @@ function Dashboard ({ token, setTokenFunc }) {
               </div>
               <h1 id="Presto-Logo" style= {{ float: 'left', fontFamily: 'Arial', color: '#1e3a8a' }}>Presto</h1>
           </Grid>
-          <Grid item xs={12} style= {{ height: '85vh', backgroundColor: '#bfdbfe', display: 'flex', flexDirection: 'row', paddingTop: '1%' }}>
+          <Grid item xs={12} style= {{ height: '85vh', backgroundColor: '#bfdbfe', display: 'flex', flexWrap: 'wrap', paddingTop: '1%' }}>
             {pressies && Object.entries(pressies).map(pressie => (
               <PresentationCards
                   key={pressie.id}

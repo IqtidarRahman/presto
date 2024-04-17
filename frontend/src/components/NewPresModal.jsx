@@ -83,7 +83,7 @@ const NewPresModal = ({ open, closeModal, token }) => {
   return (
     <>
       <div id='overlay' onClick={closeModal} style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'fixed', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '2' }}>
-        <div id='modal-container' onClick={(e) => { e.stopPropagation() }} style={{ backgroundColor: 'white', position: 'fixed', width: '30%', height: '50%', zIndex: '3', textAlign: 'center' }}>
+        <div id='modal-container' onClick={(e) => { e.stopPropagation() }} style={{ backgroundColor: 'white', position: 'fixed', width: '30%', height: '50%', zIndex: '3', textAlign: 'center', borderRadius: '15px' }}>
             <h2 style={{ fontFamily: 'arial' }}>Name of Presentation</h2>
             <TextField id="new-press-name" label="Name" variant="outlined" type='text' onChange={e => setTitle(e.target.value)} value ={title} onKeyDown={handleKeyDown}/> <br /><br />
             <TextField id="new-pres-desc" label="Description" placeholder="Placeholder" multiline rows={4} onChange={e => setDescription(e.target.value)} value ={description} onKeyDown={handleKeyDown} /> <br /><br />
