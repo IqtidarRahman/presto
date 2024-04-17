@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 function LogoutButton ({ token, setTokenFunc }) {
   const logout = async () => {
     try {
+      console.log(token);
       await axios.post('http://localhost:5005/admin/auth/logout', {}, {
         headers: {
           Authorization: token,

@@ -49,8 +49,8 @@ function Register ({ setTokenFunc }) {
 
   return (
   <>
-    <div id='background-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#dbeafe' }}>
-      <div id='outside-box' style={{ width: '400px', textAlign: 'center', backgroundColor: '#bfdbfe', borderRadius: '15px' }}>
+    <div id='background-container' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#bfdbfe' }}>
+      <div id='outside-box' style={{ width: '400px', textAlign: 'center', backgroundColor: '#dbeafe', borderRadius: '15px' }}>
         <h1 style={{ fontFamily: 'arial', color: '#1e3a8a' }}>Welcome to Presto!</h1>
         <TextField id="register-name-box" label="Name" variant="outlined" type="text" onChange={e => setName(e.target.value)} value ={name} onKeyDown={handleKeyDown} style={{ backgroundColor: '#eff6ff' }}/> <br /><br />
         <TextField id="register-email-box" label="Email" variant="outlined" type="text" onChange={e => setEmail(e.target.value)} value ={email} onKeyDown={handleKeyDown} style={{ backgroundColor: '#eff6ff' }}/> <br /><br />
