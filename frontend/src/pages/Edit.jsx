@@ -37,10 +37,10 @@ function Edit ({ token }) {
           <h3 style={{ fontFamily: 'arial' }}>{name}</h3>
           <Button onClick={() => setEditModal(true)}>Edit Title</Button>
       </div>
-      <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)}/>
-      <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)}/>
-      <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)}/>
-      <AddCodeModal open={addCodeModal} closeModal={() => setAddCodeModal(false)}/>
+      <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)} token={token} presId={id}/>
+      <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)} token={token} presId={id}/>
+      <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)} token={token} presId={id}/>
+      <AddCodeModal open={addCodeModal} closeModal={() => setAddCodeModal(false)} token={token} presId={id}/>
       <Grid container spacing={0} style= {{ height: '100%', backgroundColor: '#dbeafe' }}>
         <Grid item xs={2}>
           <ResponsiveDrawer openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} />
