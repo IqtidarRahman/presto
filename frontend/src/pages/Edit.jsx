@@ -1,11 +1,12 @@
 import React from 'react';
 import PresSlide from '../components/PresSlide';
-import { useNavigate, useLocation } from 'react-router-dom';
-import Button from '@mui/material/Button';
+import { useLocation } from 'react-router-dom';
+// import Button from '@mui/material/Button';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import ResponsiveDrawer from '../components/ResponsiveDrawer';
+import Grid from '@mui/material/Grid';
 
 function Edit ({ token }) {
-  const navigate = useNavigate();
   const location = useLocation();
   const [confirmModal, setConfirmModal] = React.useState(false); // Modal that says "Are you sure?" when you click delete presentation
 
@@ -16,22 +17,24 @@ function Edit ({ token }) {
   // Take index 2 of this array to get the presentation id
   const urlParts = currentUrl.split('/');
 
-  // Function to navigate back to dashboard
-  const goBackToDash = () => {
-    navigate('/dashboard');
-  }
-
   return (
     <>
-      <div style = {{ height: '100vh', backgroundColor: '#dbeafe' }}>
-        <div style = {{ float: 'left' }}>
-          <ConfirmDeleteModal open={confirmModal} closeModal={() => setConfirmModal(false)} token={token} deleteId={urlParts[2]}/>
-          <Button onClick={() => setConfirmModal(true)} variant="contained">Delete</Button>
-          <Button onClick={goBackToDash} variant="contained">Back</Button>
-        </div>
-        <br/><br/><br/>
-        <PresSlide/>
-      </div>
+      <ConfirmDeleteModal open={confirmModal} closeModal={() => setConfirmModal(false)} token={token} deleteId={urlParts[2]}/>
+      <Grid container spacing={0} style= {{ height: '100%', backgroundColor: '#dbeafe' }}>
+        <Grid item xs={2}>
+          <ResponsiveDrawer openModal={() => setConfirmModal(true)} />
+        </Grid>
+        <Grid item xs={10} style = {{ border: '1px solid grey', overflowX: 'auto' }}>
+          <div style = {{ height: '100vh', width: '100%', backgroundColor: '#dbeafe' }}>
+            <div style = {{ float: 'left' }}>
+              {/* <Button onClick={() => setConfirmModal(true)} variant="contained">Delete</Button>
+              <Button onClick={goBackToDash} variant="contained">Back</Button> */}
+            </div>
+            <br/><br/>
+            <PresSlide/>
+          </div>
+        </Grid>
+      </Grid>
     </>
   );
 }
