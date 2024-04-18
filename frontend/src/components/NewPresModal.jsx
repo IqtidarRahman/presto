@@ -57,8 +57,10 @@ const NewPresModal = ({ open, closeModal, token }) => {
           defaultColor: null,
           content: {
             slide1: {
-              code: {},
+              text: {},
               image: {},
+              video: {},
+              code: {}
             }
           }
         }

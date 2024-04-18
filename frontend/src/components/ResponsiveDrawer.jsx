@@ -20,7 +20,7 @@ import Toolbar from '@mui/material/Toolbar';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer ({ openModal }) {
+function ResponsiveDrawer ({ openModal, setAddTextModal, setAddImageModal, setAddVideoModal, setAddCodeModal }) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -66,16 +66,34 @@ function ResponsiveDrawer ({ openModal }) {
       </List>
       <Divider />
       <List>
-        {['Add Text', 'Add Image', 'Add Video', 'Add Code'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <ListItem key={'Add Text'} disablePadding>
+          <ListItemButton onClick={setAddTextModal}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Add Text'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={'Add Image'} disablePadding>
+          <ListItemButton onClick={setAddImageModal}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Add Image'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={'Add Video'} disablePadding>
+          <ListItemButton onClick={setAddVideoModal}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Add Video'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={'Add Code'} disablePadding>
+          <ListItemButton onClick={setAddCodeModal}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Add Code'} />
+          </ListItemButton>
+        </ListItem>
       </List>
       <Divider />
       <List>
