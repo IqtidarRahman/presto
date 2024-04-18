@@ -1,6 +1,6 @@
 import React from 'react';
 import PresSlide from '../components/PresSlide';
-import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
 import EditTitleModal from '../components/EditTitleModal';
@@ -13,7 +13,6 @@ import AddCodeModal from '../components/AddCodeModal';
 
 function Edit ({ token }) {
   const { id, name } = useParams(); // Gets the id and name from parameters
-  const navigate = useNavigate();
   const location = useLocation();
   const [confirmModal, setConfirmModal] = React.useState(false); // Modal that says "Are you sure?" when you click delete presentation
   const [editModal, setEditModal] = React.useState(false); // Modal that allows you to edit the presentation title
@@ -21,7 +20,6 @@ function Edit ({ token }) {
   const [addImageModal, setAddImageModal] = React.useState(false); // Modal for inserting image into presentation
   const [addVideoModal, setAddVideoModal] = React.useState(false); // Modal for inserting video into presentation
   const [addCodeModal, setAddCodeModal] = React.useState(false); // Modal for inserting code into presentation
-
 
   // Get the pathname of the page: will be in the form of /edit/(insert name of presentation here)
   const currentUrl = location.pathname;
@@ -34,7 +32,7 @@ function Edit ({ token }) {
     <>
       {/* Modal that pops up when the delete button is pressed */}
       <ConfirmDeleteModal open={confirmModal} closeModal={() => setConfirmModal(false)} token={token} deleteId={urlParts[2]}/>
-      <div style = {{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style = {{ display: 'flex', justifyContent: 'right' }}>
           <EditTitleModal open={editModal} closeModal={() => setEditModal(false)} token={token} presId={id}/>
           <h3 style={{ fontFamily: 'arial' }}>{name}</h3>
           <Button onClick={() => setEditModal(true)}>Edit Title</Button>

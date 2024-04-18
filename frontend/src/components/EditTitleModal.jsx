@@ -87,11 +87,15 @@ const EditTitleModal = ({ open, closeModal, token, presId }) => {
   return (
     <>
       <div id='overlay' onClick={closeModal} style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'fixed', width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: '2' }}>
-        <div id='modal-container' onClick={(e) => { e.stopPropagation() }} style={{ backgroundColor: 'white', position: 'fixed', width: '20%', height: '20%', zIndex: '3', textAlign: 'center', borderRadius: '15px' }}>
+        <div id='modal-container' onClick={(e) => { e.stopPropagation() }} style={{ backgroundColor: 'white', position: 'fixed', width: '35%', height: '25%', zIndex: '3', textAlign: 'center', borderRadius: '15px' }}>
             <h2 style={{ fontFamily: 'arial' }}>New title:</h2>
-            <input type="text" onChange={e => setPresTitle(e.target.value)} onKeyDown={handleKeyDown} />
-            <Button onClick={handleConfirmButton} variant="contained">Confirm</Button>
-            <Button onClick={closeModal} variant="contained">Back</Button>
+            <input type="text" onChange={e => setPresTitle(e.target.value)} onKeyDown={handleKeyDown} style={{ width: '90%' }}/>
+            <br />
+            <br />
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <Button onClick={handleConfirmButton} variant="contained">Confirm</Button>
+                <Button onClick={closeModal} variant="contained">Back</Button>
+            </div>
         </div>
       </div>
     </>
