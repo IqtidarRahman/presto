@@ -1,8 +1,9 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+// import axios from 'axios';
 
-const AddCodeModal = ({ open, closeModal }) => {
+const AddCodeModal = ({ open, closeModal, token, presId }) => {
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
   const [code, setCode] = React.useState('');
@@ -12,6 +13,16 @@ const AddCodeModal = ({ open, closeModal }) => {
   if (!open) {
     return null;
   }
+
+  // IQTI TO DO
+  // IMPLEMENT SAVING THE VIDEO TO THE DATABASE
+
+  // INSTRUCTIONS
+  // Uncomment the import axios line
+  // Look at the code in AddTextModal.jsx or AddImageModal.jsx (code is basically the same)
+  // Understand how it works, ive laid out some comments so hopefully its not too bad to understand
+  // Copy and paste code
+  // Replace everything with video instead of like image or text
 
   return (
     <>
