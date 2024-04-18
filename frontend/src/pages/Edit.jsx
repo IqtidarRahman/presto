@@ -1,8 +1,9 @@
 import React from 'react';
 import PresSlide from '../components/PresSlide';
-import { useLocation } from 'react-router-dom';
-// import Button from '@mui/material/Button';
+import { useLocation, useParams } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import ConfirmDeleteModal from '../components/ConfirmDeleteModal';
+import EditTitleModal from '../components/EditTitleModal';
 import AddTextModal from '../components/AddTextModal';
 import ResponsiveDrawer from '../components/ResponsiveDrawer';
 import Grid from '@mui/material/Grid';
@@ -11,8 +12,10 @@ import AddVideoModal from '../components/AddVideoModal';
 import AddCodeModal from '../components/AddCodeModal';
 
 function Edit ({ token }) {
+  const { id, name } = useParams(); // Gets the id and name from parameters
   const location = useLocation();
   const [confirmModal, setConfirmModal] = React.useState(false); // Modal that says "Are you sure?" when you click delete presentation
+  const [editModal, setEditModal] = React.useState(false); // Modal that allows you to edit the presentation title
   const [addTextModal, setAddTextModal] = React.useState(false); // Modal for making a new textbox
   const [addImageModal, setAddImageModal] = React.useState(false); // Modal for inserting image into presentation
   const [addVideoModal, setAddVideoModal] = React.useState(false); // Modal for inserting video into presentation
@@ -29,6 +32,11 @@ function Edit ({ token }) {
     <>
       {/* Modal that pops up when the delete button is pressed */}
       <ConfirmDeleteModal open={confirmModal} closeModal={() => setConfirmModal(false)} token={token} deleteId={urlParts[2]}/>
+      <div style = {{ display: 'flex', justifyContent: 'right' }}>
+          <EditTitleModal open={editModal} closeModal={() => setEditModal(false)} token={token} presId={id}/>
+          <h3 style={{ fontFamily: 'arial' }}>{name}</h3>
+          <Button onClick={() => setEditModal(true)}>Edit Title</Button>
+      </div>
       <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)}/>
       <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)}/>
       <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)}/>

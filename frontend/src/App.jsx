@@ -26,8 +26,8 @@ function App () {
           <Route path="/register" element={<Register setTokenFunc = {updateToken}/>} />
           <Route path="/login" element={<Login setTokenFunc = {updateToken}/>} /> {/* Pass the setToken function as a variable in Login */}
           <Route path="/dashboard" element={<Dashboard token = {token} setTokenFunc = {updateToken} />} />
-          <Route path="/edit" element={<Edit token = {token} />} />
           <Route path="/edit/:id/:name" element={<Edit token = {token} />} />
+          <Route path="/edit" element={<Edit token = {token} />} />
         </Route>
       </Routes>
     </BrowserRouter>
