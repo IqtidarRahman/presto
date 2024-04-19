@@ -10,6 +10,8 @@ import Grid from '@mui/material/Grid';
 import AddImageModal from '../components/AddImageModal';
 import AddVideoModal from '../components/AddVideoModal';
 import AddCodeModal from '../components/AddCodeModal';
+import NextSlideButton from '../components/NextSlideButton';
+import PrevSlideButton from '../components/PrevSlideButton';
 
 function Edit ({ token }) {
   const { id, name } = useParams(); // Gets the id and name from parameters
@@ -20,6 +22,11 @@ function Edit ({ token }) {
   const [addImageModal, setAddImageModal] = React.useState(false); // Modal for inserting image into presentation
   const [addVideoModal, setAddVideoModal] = React.useState(false); // Modal for inserting video into presentation
   const [addCodeModal, setAddCodeModal] = React.useState(false); // Modal for inserting code into presentation
+  const [nextSlideButton, setNextSlideButton] = React.useState(false); // Button for going to next slide in presentation
+  const [prevSlideButton, setPrevSlideButton] = React.useState(false); // Button for going to previous slide in presentation
+  const [slideId, setSlideId] = React.useState('slide1');
+  console.log(slideId);
+  console.log(setSlideId);
 
   // Get the pathname of the page: will be in the form of /edit/(insert name of presentation here)
   const currentUrl = location.pathname;
@@ -37,13 +44,17 @@ function Edit ({ token }) {
           <h3 style={{ fontFamily: 'arial' }}>{name}</h3>
           <Button onClick={() => setEditModal(true)}>Edit Title</Button>
       </div>
+      <NextSlideButton open={nextSlideButton} closeModal={() => setNextSlideButton(false)} token={token} presId={id}/>
+      <PrevSlideButton open={prevSlideButton} closeModal={() => setPrevSlideButton(false)} token={token} presId={id}/>
+
       <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)} token={token} presId={id}/>
       <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)} token={token} presId={id}/>
       <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)} token={token} presId={id}/>
       <AddCodeModal open={addCodeModal} closeModal={() => setAddCodeModal(false)} token={token} presId={id}/>
       <Grid container spacing={0} style= {{ height: '100%', backgroundColor: '#dbeafe' }}>
         <Grid item xs={2}>
-          <ResponsiveDrawer openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} />
+          {/* <ResponsiveDrawer token={token} presId={id} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)}/> */}
+          <ResponsiveDrawer token={token} presId={id} slideId={slideId} setSlideId={() => setSlideId()} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)}/>
         </Grid>
         <Grid item xs={10} style = {{ border: '1px solid grey', overflowX: 'auto' }}>
           <div style = {{ height: '100vh', width: '100%', backgroundColor: '#dbeafe' }}>
@@ -52,8 +63,8 @@ function Edit ({ token }) {
               <Button onClick={goBackToDash} variant="contained">Back</Button> */}
             </div>
             <br/><br/>
-            <PresSlide/>
-          </div>
+            <PresSlide token={token} presId={id} slideId={slideId} setSlideId={() => setSlideId()}/>
+          </div >
         </Grid>
       </Grid>
     </>

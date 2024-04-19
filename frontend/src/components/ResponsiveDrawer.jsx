@@ -17,10 +17,12 @@ import ListItemText from '@mui/material/ListItemText';
 // import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
+import CreateSlideButton from './CreateSlideButton';
+import NextSlideButton from './NextSlideButton';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer ({ openModal, setAddTextModal, setAddImageModal, setAddVideoModal, setAddCodeModal }) {
+function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setAddTextModal, setAddImageModal, setAddVideoModal, setAddCodeModal }) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -53,16 +55,22 @@ function ResponsiveDrawer ({ openModal, setAddTextModal, setAddImageModal, setAd
       <Toolbar />
       <Divider />
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        <CreateSlideButton token={token} presId={presId}></CreateSlideButton>
+        <NextSlideButton token={token} presId={presId} slideId={slideId} setSlideId={() => setSlideId()}></NextSlideButton>
+        {/* <ListItem key={'Next slide'} disablePadding>
+          <ListItemButton onClick={setNextSlideButton}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Next slide'} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key={'Prev slide'} disablePadding>
+          <ListItemButton onClick={setPrevSlideButton}>
+            <ListItemIcon>
+            </ListItemIcon>
+            <ListItemText primary={'Prev slide'} />
+          </ListItemButton>
+        </ListItem> */}
       </List>
       <Divider />
       <List>
