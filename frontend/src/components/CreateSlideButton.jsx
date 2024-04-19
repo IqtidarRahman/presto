@@ -81,6 +81,7 @@ const CreateSlideButton = ({ token, presId }) => {
       <ListItem key={'Create Slide'} disablePadding >
         <ListItemButton onClick={clickCreate}>
           <ListItemIcon>
+            <p>+</p>
           </ListItemIcon>
           <ListItemText primary={'Create Slide'} />
         </ListItemButton>

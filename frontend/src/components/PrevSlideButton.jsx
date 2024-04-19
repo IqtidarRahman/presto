@@ -18,6 +18,7 @@ const PrevSlideButton = ({ token, presId, slideId, setSlideId, slidePrev, setSli
       <ListItem key={'Prev slide'} disablePadding>
         <ListItemButton onClick={clickPrev}>
           <ListItemIcon>
+            <p>←</p>
           </ListItemIcon>
           <ListItemText primary={'Prev slide'} />
         </ListItemButton>
