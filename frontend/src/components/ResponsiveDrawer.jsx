@@ -20,6 +20,7 @@ import Toolbar from '@mui/material/Toolbar';
 import CreateSlideButton from './CreateSlideButton';
 import NextSlideButton from './NextSlideButton';
 import SlideNumber from './SlideNumber';
+import PrevSlideButton from './PrevSlideButton';
 
 const drawerWidth = 240;
 
@@ -57,7 +58,12 @@ function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setA
       <Divider />
       <List>
         <CreateSlideButton token={token} presId={presId}></CreateSlideButton>
-        <NextSlideButton presTitle={presTitle} token={token} presId={presId} slideNext={slideNext} slidePrev={slidePrev} slideId={slideId} setSlideId={setSlideId} style={{ visibility: `${showNext ? 'visible' : 'hidden'}` }}></NextSlideButton>
+        {showNext && (
+          <NextSlideButton presTitle={presTitle} token={token} presId={presId} slideNext={slideNext} slideId={slideId} setSlideId={setSlideId} style={{ visibility: `${showNext ? 'visible' : 'hidden'}` }}></NextSlideButton>
+        )}
+        {showPrev && (
+          <PrevSlideButton presTitle={presTitle} token={token} presId={presId} slidePrev={slidePrev} slideId={slideId} setSlideId={setSlideId}></PrevSlideButton>
+        )}
         {/* <ListItem key={'Next slide'} disablePadding>
           <ListItemButton onClick={setNextSlideButton}>
             <ListItemIcon>
