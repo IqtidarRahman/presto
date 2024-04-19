@@ -2,8 +2,10 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const AddTextModal = ({ open, closeModal, token, presId }) => {
+const AddTextModal = ({ open, closeModal, token, presId, presTitle }) => {
+  const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
   const [text, setText] = React.useState('');
@@ -88,6 +90,8 @@ const AddTextModal = ({ open, closeModal, token, presId }) => {
         alert(err.response.data.error);
       }
       closeModal();
+      navigate('/dashboard');
+      navigate('/edit/' + presId + '/' + presTitle);
     }
   }
 
