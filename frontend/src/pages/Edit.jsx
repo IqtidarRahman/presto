@@ -84,8 +84,6 @@ function Edit ({ token }) {
     getStore();
   }, [token, id, slideId]);
 
-  console.log('KKKKKLKSADLKLKLASKDLKS', slideNext);
-  console.log('>>>>>>>>>>>><<<<<<<<<<<<<<<', slideNumber, slideCount);
   return (
     <>
       {/* Modal that pops up when the delete button is pressed */}

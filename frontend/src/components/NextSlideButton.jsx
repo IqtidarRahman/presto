@@ -5,14 +5,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 const NextSlideButton = ({ token, presId, slideId, setSlideId, slideNext, setSlideNext, presTitle }) => {
-  console.log('a');
   const clickNext = () => {
-    console.log('b', setSlideId, slideNext, setSlideNext);
     setSlideId(slideNext);
-    console.log('c');
   };
-
-  console.log('d');
 
   return (
     <>

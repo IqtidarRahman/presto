@@ -21,6 +21,7 @@ import CreateSlideButton from './CreateSlideButton';
 import NextSlideButton from './NextSlideButton';
 import SlideNumber from './SlideNumber';
 import PrevSlideButton from './PrevSlideButton';
+import DeleteSlide from './DeleteSlide';
 
 const drawerWidth = 240;
 
@@ -64,6 +65,7 @@ function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setA
         {showPrev && (
           <PrevSlideButton presTitle={presTitle} token={token} presId={presId} slidePrev={slidePrev} slideId={slideId} setSlideId={setSlideId}></PrevSlideButton>
         )}
+        <DeleteSlide></DeleteSlide>
         {/* <ListItem key={'Next slide'} disablePadding>
           <ListItemButton onClick={setNextSlideButton}>
             <ListItemIcon>
