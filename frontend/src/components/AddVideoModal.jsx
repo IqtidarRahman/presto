@@ -7,7 +7,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddVideoModal = ({ open, closeModal, token, presId, presTitle }) => {
+const AddVideoModal = ({ open, closeModal, token, presId, presTitle, slideId }) => {
   const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
@@ -37,10 +37,10 @@ const AddVideoModal = ({ open, closeModal, token, presId, presTitle }) => {
 
       // Create videobox id
       // If no items in dictionary, then give id 1, else get the last items id and add 1
-      const dictLength = Object.keys(currentData[presId].content.slide1.video).length;
+      const dictLength = Object.keys(currentData[presId].content[slideId].video).length;
       let newId = 1
       if (dictLength !== 0) {
-        const keysArray = Object.keys(currentData[presId].content.slide1.video);
+        const keysArray = Object.keys(currentData[presId].content[slideId].video);
 
         // Keys in the video dictionary given as a string e.g "video1", filter out "video" then parse integer
         newId = parseInt(keysArray[keysArray.length - 1].slice(5)) + 1;
@@ -56,10 +56,10 @@ const AddVideoModal = ({ open, closeModal, token, presId, presTitle }) => {
           ...currentData[presId],
           content: {
             ...currentData[presId].content,
-            slide1: {
-              ...currentData[presId].content.slide1,
+            [slideId]: {
+              ...currentData[presId].content[slideId],
               video: {
-                ...currentData[presId].content.slide1.video,
+                ...currentData[presId].content[slideId].video,
                 [videoId]: {
                   height: height,
                   width: width,

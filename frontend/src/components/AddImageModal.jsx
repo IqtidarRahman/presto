@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddImageModal = ({ open, closeModal, token, presId, presTitle }) => {
+const AddImageModal = ({ open, closeModal, token, presId, presTitle, slideId }) => {
   const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
@@ -32,10 +32,10 @@ const AddImageModal = ({ open, closeModal, token, presId, presTitle }) => {
 
       // Create textbox id
       // If no items in dictionary, then give id 1, else get the last items id and add 1
-      const dictLength = Object.keys(currentData[presId].content.slide1.image).length;
+      const dictLength = Object.keys(currentData[presId].content[slideId].image).length;
       let newId = 1
       if (dictLength !== 0) {
-        const keysArray = Object.keys(currentData[presId].content.slide1.image);
+        const keysArray = Object.keys(currentData[presId].content[slideId].image);
 
         // Keys in the text dictionary given as a string e.g "image1", filter out "image" then parse integer
         newId = parseInt(keysArray[keysArray.length - 1].slice(5)) + 1;
@@ -51,10 +51,10 @@ const AddImageModal = ({ open, closeModal, token, presId, presTitle }) => {
           ...currentData[presId],
           content: {
             ...currentData[presId].content,
-            slide1: {
-              ...currentData[presId].content.slide1,
+            [slideId]: {
+              ...currentData[presId].content[slideId],
               image: {
-                ...currentData[presId].content.slide1.image,
+                ...currentData[presId].content[slideId].image,
                 [imageId]: {
                   height: height,
                   width: width,
