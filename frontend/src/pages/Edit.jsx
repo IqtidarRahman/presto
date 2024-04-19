@@ -12,6 +12,7 @@ import AddVideoModal from '../components/AddVideoModal';
 import AddCodeModal from '../components/AddCodeModal';
 import NextSlideButton from '../components/NextSlideButton';
 import PrevSlideButton from '../components/PrevSlideButton';
+import axios from 'axios';
 
 function Edit ({ token }) {
   const { id, name } = useParams(); // Gets the id and name from parameters
@@ -25,8 +26,13 @@ function Edit ({ token }) {
   const [nextSlideButton, setNextSlideButton] = React.useState(false); // Button for going to next slide in presentation
   const [prevSlideButton, setPrevSlideButton] = React.useState(false); // Button for going to previous slide in presentation
   const [slideId, setSlideId] = React.useState('slide1');
-  console.log(slideId);
-  console.log(setSlideId);
+
+  const [showNext, setShowNext] = React.useState(true);
+  const [showPrev, setShowPrev] = React.useState(true);
+  const [slideNext, setSlideNext] = React.useState();
+  const [slidePrev, setSlidePrev] = React.useState();
+  const [slideNumber, setSlideNumber] = React.useState();
+  const [slideCount, setSlideCount] = React.useState();
 
   // Get the pathname of the page: will be in the form of /edit/(insert name of presentation here)
   const currentUrl = location.pathname;
@@ -35,6 +41,48 @@ function Edit ({ token }) {
   // Take index 2 of this array to get the presentation id
   const urlParts = currentUrl.split('/');
 
+  React.useEffect(() => {
+    const getStore = async () => {
+      try {
+        const response = await axios.get('http://localhost:5005/store', {
+          headers: {
+            Authorization: token,
+          }
+        });
+        const currentData = response.data.store;
+        const slides = currentData[id].content;
+        const keys = Object.keys(slides);
+        setSlideCount(keys.length);
+        const currentIndex = keys.indexOf(slideId);
+        setSlideNumber(currentIndex + 1);
+        const nextIndex = currentIndex + 1;
+        const prevIndex = currentIndex - 1;
+
+        if (nextIndex < keys.length) {
+          const nextKey = keys[nextIndex];
+          console.log('><><>>>><><><><><><><>><><<><><><><', nextKey);
+          setSlideNext(nextKey);
+        } else {
+          setShowNext(false);
+          console.log('No next slide available.');
+        }
+        if (prevIndex < 0) {
+          const prevKey = keys[prevIndex];
+          setSlidePrev(prevKey);
+        } else {
+          setShowPrev(false);
+          console.log('No next slide available.');
+        }
+      } catch (error) {
+        console.error('Error fetching store:', error);
+      }
+    };
+
+    getStore();
+  }, [token, id, slideId]);
+
+  console.log('KKKKKLKSADLKLKLASKDLKS', slideNext);
+  console.log('>>>>>>>>>>>><<<<<<<<<<<<<<<', slideNumber, slideCount);
   return (
     <>
       {/* Modal that pops up when the delete button is pressed */}
@@ -54,7 +102,7 @@ function Edit ({ token }) {
       <Grid container spacing={0} style= {{ height: '100%', backgroundColor: '#dbeafe' }}>
         <Grid item xs={2}>
           {/* <ResponsiveDrawer token={token} presId={id} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)}/> */}
-          <ResponsiveDrawer token={token} presId={id} slideId={slideId} setSlideId={() => setSlideId()} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)}/>
+          <ResponsiveDrawer token={token} presId={id} slideId={slideId} setSlideId={setSlideId} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)} slideNumber={slideNumber} slideCount={slideCount} showNext={showNext} showPrev={showPrev} slideNext={slideNext} slidePrev={slidePrev} presTitle={name}/>
         </Grid>
         <Grid item xs={10} style = {{ border: '1px solid grey', overflowX: 'auto' }}>
           <div style = {{ height: '100vh', width: '100%', backgroundColor: '#dbeafe' }}>
@@ -63,7 +111,7 @@ function Edit ({ token }) {
               <Button onClick={goBackToDash} variant="contained">Back</Button> */}
             </div>
             <br/><br/>
-            <PresSlide token={token} presId={id} presTitle={name} slideId={slideId} setSlideId={() => setSlideId()}/>
+            <PresSlide token={token} presId={id} presTitle={name} slideId={slideId} setSlideId={() => setSlideId}/>
           </div >
         </Grid>
       </Grid>

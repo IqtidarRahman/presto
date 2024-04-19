@@ -19,10 +19,11 @@ import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
 import CreateSlideButton from './CreateSlideButton';
 import NextSlideButton from './NextSlideButton';
+import SlideNumber from './SlideNumber';
 
 const drawerWidth = 240;
 
-function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setAddTextModal, setAddImageModal, setAddVideoModal, setAddCodeModal }) {
+function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setAddTextModal, setAddImageModal, setAddVideoModal, setAddCodeModal, slideNumber, slideCount, showNext, showPrev, slideNext, slidePrev, presTitle }) {
   // const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
@@ -56,7 +57,7 @@ function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setA
       <Divider />
       <List>
         <CreateSlideButton token={token} presId={presId}></CreateSlideButton>
-        <NextSlideButton token={token} presId={presId} slideId={slideId} setSlideId={() => setSlideId()}></NextSlideButton>
+        <NextSlideButton presTitle={presTitle} token={token} presId={presId} slideNext={slideNext} slidePrev={slidePrev} slideId={slideId} setSlideId={setSlideId} style={{ visibility: `${showNext ? 'visible' : 'hidden'}` }}></NextSlideButton>
         {/* <ListItem key={'Next slide'} disablePadding>
           <ListItemButton onClick={setNextSlideButton}>
             <ListItemIcon>
@@ -120,6 +121,7 @@ function ResponsiveDrawer ({ token, presId, slideId, setSlideId, openModal, setA
           </ListItemButton>
         </ListItem>
       </List>
+      <SlideNumber slideNumber={slideNumber} slideCount={slideCount}>l</SlideNumber>
     </div>
   );
 
