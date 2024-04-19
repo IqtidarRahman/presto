@@ -2,8 +2,10 @@ import React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const AddImageModal = ({ open, closeModal, token, presId }) => {
+const AddImageModal = ({ open, closeModal, token, presId, presTitle }) => {
+  const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
   const [url, setUrl] = React.useState('');
@@ -52,7 +54,7 @@ const AddImageModal = ({ open, closeModal, token, presId }) => {
             slide1: {
               ...currentData[presId].content.slide1,
               image: {
-                ...currentData[presId].content.slide1.text,
+                ...currentData[presId].content.slide1.image,
                 [imageId]: {
                   height: height,
                   width: width,
@@ -85,6 +87,8 @@ const AddImageModal = ({ open, closeModal, token, presId }) => {
       alert(err.response.data.error);
     }
     closeModal();
+    navigate('/dashboard');
+    navigate('/edit/' + presId + '/' + presTitle);
   }
 
   return (

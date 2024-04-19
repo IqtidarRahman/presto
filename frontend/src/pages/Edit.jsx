@@ -47,10 +47,10 @@ function Edit ({ token }) {
       <NextSlideButton open={nextSlideButton} closeModal={() => setNextSlideButton(false)} token={token} presId={id}/>
       <PrevSlideButton open={prevSlideButton} closeModal={() => setPrevSlideButton(false)} token={token} presId={id}/>
 
-      <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)} token={token} presId={id}/>
-      <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)} token={token} presId={id}/>
-      <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)} token={token} presId={id}/>
-      <AddCodeModal open={addCodeModal} closeModal={() => setAddCodeModal(false)} token={token} presId={id}/>
+      <AddTextModal open={addTextModal} closeModal={() => setAddTextModal(false)} token={token} presId={id} presTitle={name}/>
+      <AddImageModal open={addImageModal} closeModal={() => setAddImageModal(false)} token={token} presId={id} presTitle={name}/>
+      <AddVideoModal open={addVideoModal} closeModal={() => setAddVideoModal(false)} token={token} presId={id} presTitle={name}/>
+      <AddCodeModal open={addCodeModal} closeModal={() => setAddCodeModal(false)} token={token} presId={id} presTitle={name}/>
       <Grid container spacing={0} style= {{ height: '100%', backgroundColor: '#dbeafe' }}>
         <Grid item xs={2}>
           {/* <ResponsiveDrawer token={token} presId={id} openModal={() => setConfirmModal(true)} setAddTextModal={() => setAddTextModal(true)} setAddImageModal={() => setAddImageModal(true)} setAddVideoModal={() => setAddVideoModal(true)} setAddCodeModal={() => setAddCodeModal(true)} setNextSlideButton={() => setNextSlideButton(true)} setPrevSlideButton={() => setPrevSlideButton(true)}/> */}
@@ -63,7 +63,7 @@ function Edit ({ token }) {
               <Button onClick={goBackToDash} variant="contained">Back</Button> */}
             </div>
             <br/><br/>
-            <PresSlide token={token} presId={id} slideId={slideId} setSlideId={() => setSlideId()}/>
+            <PresSlide token={token} presId={id} presTitle={name} slideId={slideId} setSlideId={() => setSlideId()}/>
           </div >
         </Grid>
       </Grid>

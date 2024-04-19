@@ -4,9 +4,11 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-// import axios from 'axios';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const AddVideoModal = ({ open, closeModal, token, presId }) => {
+const AddVideoModal = ({ open, closeModal, token, presId, presTitle }) => {
+  const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
   const [url, setUrl] = React.useState('');
@@ -19,15 +21,80 @@ const AddVideoModal = ({ open, closeModal, token, presId }) => {
     return null;
   }
 
-  // IQTI TO DO
-  // IMPLEMENT SAVING THE VIDEO TO THE DATABASE
+  const saveVideoBox = () => {
+    getStore();
+  }
 
-  // INSTRUCTIONS
-  // Uncomment the import axios line
-  // Look at the code in AddTextModal.jsx or AddImageModal.jsx (code is basically the same)
-  // Understand how it works, ive laid out some comments so hopefully its not too bad to understand
-  // Copy and paste code
-  // Replace everything with video instead of like image or text
+  let currentData = ''
+  let store = ''
+  const getStore = async () => {
+    axios.get('http://localhost:5005/store', {
+      headers: {
+        Authorization: token,
+      }
+    }).then((response) => {
+      currentData = response.data.store;
+
+      // Create videobox id
+      // If no items in dictionary, then give id 1, else get the last items id and add 1
+      const dictLength = Object.keys(currentData[presId].content.slide1.video).length;
+      let newId = 1
+      if (dictLength !== 0) {
+        const keysArray = Object.keys(currentData[presId].content.slide1.video);
+
+        // Keys in the video dictionary given as a string e.g "video1", filter out "video" then parse integer
+        newId = parseInt(keysArray[keysArray.length - 1].slice(5)) + 1;
+      }
+
+      // Create the video Id, by concatenating the "video" and ID number
+      const videoId = 'video' + newId.toString();
+
+      // Add new item to the video dictionary inside of slide
+      store = {
+        ...currentData,
+        [presId]: {
+          ...currentData[presId],
+          content: {
+            ...currentData[presId].content,
+            slide1: {
+              ...currentData[presId].content.slide1,
+              video: {
+                ...currentData[presId].content.slide1.video,
+                [videoId]: {
+                  height: height,
+                  width: width,
+                  url: url,
+                  autoplay: autoplay
+                },
+              }
+            }
+          }
+        }
+      }
+      console.log(store);
+      // Put Request to Save the New Data
+      savePres(store);
+    })
+
+    // Save the videobox into data
+    const savePres = async (store) => {
+      try {
+        await axios.put('http://localhost:5005/store', {
+          store
+        },
+        {
+          headers: {
+            Authorization: token,
+          }
+        });
+      } catch (err) {
+        alert(err.response.data.error);
+      }
+      closeModal();
+      navigate('/dashboard');
+      navigate('/edit/' + presId + '/' + presTitle);
+    }
+  }
 
   return (
     <>
@@ -42,6 +109,7 @@ const AddVideoModal = ({ open, closeModal, token, presId }) => {
             <FormGroup>
               <FormControlLabel control={<Checkbox defaultChecked onChange={e => setAutoplay(e.target.checked)} value ={autoplay}/>} label="Autoplay" />
             </FormGroup>
+            <Button onClick={saveVideoBox} variant="contained">Confirm</Button>
             <Button onClick={closeModal} variant="contained">Back</Button>
         </div>
       </div>

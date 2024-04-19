@@ -1,0 +1,83 @@
+import React from 'react';
+import Draggable from 'react-draggable';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const CodeBox = ({ height, width, code, fontSize, codeBlockId, presId, presTitle, token }) => {
+  const navigate = useNavigate();
+  const nodeRef = React.useRef(null);
+
+  // Split the code string up
+  const newCode = code.replace(/ /g, `${'\u00A0'}`);
+  const splitCode = newCode.split('\n');
+  console.log(splitCode);
+
+  // Prevents the box from going over the side
+  const rightLimit = 1000 - parseInt(width);
+
+  // Prevents the box from going over the bottom
+  const bottomLimit = 700 - parseInt(height);
+
+  // Right Click Handler for deleting the codebox
+  const handleRightClick = (e) => {
+    e.preventDefault(); // Prevent the default context menu
+    console.log('Right-clicked!');
+    getStore();
+  };
+
+  let currentData = ''
+  const getStore = async () => {
+    axios.get('http://localhost:5005/store', {
+      headers: {
+        Authorization: token,
+      }
+    }).then((response) => {
+      // Get Current Data
+      currentData = response.data.store;
+      console.log('text dictionary', currentData[presId].content.slide1.code);
+
+      // Delete codeblockId from current data
+      delete currentData[presId].content.slide1.code[codeBlockId];
+
+      console.log(currentData);
+
+      // Put Request to Save the New Data
+      savePres(currentData);
+    })
+  }
+
+  // Save the changes to database
+  const savePres = async (store) => {
+    console.log(store);
+    try {
+      await axios.put('http://localhost:5005/store', { store },
+        {
+          headers: {
+            Authorization: token,
+          }
+        });
+    } catch (err) {
+      alert(err.response.data.error);
+    }
+
+    navigate('/dashboard');
+    navigate('/edit/' + presId + '/' + presTitle);
+  }
+
+  return (
+    <>
+      <Draggable nodeRef={nodeRef} bounds={{ left: 0, top: 0, right: rightLimit, bottom: bottomLimit }}>
+        <div id="pres-slide" ref={nodeRef} onContextMenu={handleRightClick} style={{ height: `${height}`, width: `${width}`, fontSize: `${fontSize}`, backgroundColor: '#f4f4f4', color: '#333', fontFamily: 'Courier New', border: '0.2px solid grey' }}>
+            {/* <p ref={nodeRef}>
+              {code}
+            </p> */}
+            {splitCode.map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+        </div>
+      </Draggable>
+    </>
+  );
+}
+
+export default CodeBox;
