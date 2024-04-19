@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const AddCodeModal = ({ open, closeModal, token, presId, presTitle }) => {
+const AddCodeModal = ({ open, closeModal, token, presId, presTitle, slideId }) => {
   const navigate = useNavigate();
   const [height, setHeight] = React.useState('');
   const [width, setWidth] = React.useState('');
@@ -32,10 +32,10 @@ const AddCodeModal = ({ open, closeModal, token, presId, presTitle }) => {
 
       // Create codebox id
       // If no items in dictionary, then give id 1, else get the last items id and add 1
-      const dictLength = Object.keys(currentData[presId].content.slide1.code).length;
+      const dictLength = Object.keys(currentData[presId].content[slideId].code).length;
       let newId = 1
       if (dictLength !== 0) {
-        const keysArray = Object.keys(currentData[presId].content.slide1.code);
+        const keysArray = Object.keys(currentData[presId].content[slideId].code);
 
         // Keys in the code dictionary given as a string e.g "code1", filter out "code" then parse integer
         newId = parseInt(keysArray[keysArray.length - 1].slice(4)) + 1;
@@ -51,10 +51,10 @@ const AddCodeModal = ({ open, closeModal, token, presId, presTitle }) => {
           ...currentData[presId],
           content: {
             ...currentData[presId].content,
-            slide1: {
-              ...currentData[presId].content.slide1,
+            [slideId]: {
+              ...currentData[presId].content[slideId],
               code: {
-                ...currentData[presId].content.slide1.code,
+                ...currentData[presId].content[slideId].code,
                 [codeId]: {
                   height: height,
                   width: width,

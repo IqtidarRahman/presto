@@ -18,12 +18,13 @@ const PresSlide = ({ token, presId, presTitle, slideId }) => {
         Authorization: token,
       }
     }).then((response) => {
-      setTextBoxes(response.data.store[presId].content.slide1.text);
-      setImages(response.data.store[presId].content.slide1.image);
-      setVideos(response.data.store[presId].content.slide1.video);
-      setCodes(response.data.store[presId].content.slide1.code);
+      console.log('SLIDEEEE IDDDDDDD', slideId);
+      setTextBoxes(response.data.store[presId].content[slideId].text);
+      setImages(response.data.store[presId].content[slideId].image);
+      setVideos(response.data.store[presId].content[slideId].video);
+      setCodes(response.data.store[presId].content[slideId].code);
     })
-  }, []);
+  }, [slideId]);
 
   return (
     <>
