@@ -28,7 +28,7 @@ function Edit ({ token }) {
   const [slideId, setSlideId] = React.useState('slide1');
 
   const [showNext, setShowNext] = React.useState(true);
-  const [showPrev, setShowPrev] = React.useState(true);
+  const [showPrev, setShowPrev] = React.useState(false);
   const [slideNext, setSlideNext] = React.useState();
   const [slidePrev, setSlidePrev] = React.useState();
   const [slideNumber, setSlideNumber] = React.useState();
@@ -62,16 +62,19 @@ function Edit ({ token }) {
           const nextKey = keys[nextIndex];
           console.log('><><>>>><><><><><><><>><><<><><><><', nextKey);
           setSlideNext(nextKey);
+          setShowNext(true);
         } else {
           setShowNext(false);
           console.log('No next slide available.');
         }
-        if (prevIndex < 0) {
+        if (prevIndex >= 0) {
           const prevKey = keys[prevIndex];
+          console.log('PPPPPPPPPPPPPPPPPPPP', prevKey);
           setSlidePrev(prevKey);
+          setShowPrev(true);
         } else {
           setShowPrev(false);
-          console.log('No next slide available.');
+          console.log('No previous slide available.');
         }
       } catch (error) {
         console.error('Error fetching store:', error);
